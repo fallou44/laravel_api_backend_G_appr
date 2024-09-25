@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable grpc
 
 # Configurer Nginx
-COPY nginx/default.conf /etc/nginx/sites-available/default
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 RUN rm -f /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
