@@ -1,5 +1,5 @@
-# Utilise l'image officielle PHP 8.1 avec FPM
-FROM php:8.1-fpm
+# Utilise l'image officielle PHP 8.2 avec FPM
+FROM php:8.2-fpm
 
 # Installations de dépendances système
 RUN apt-get update && apt-get install -y \
@@ -11,7 +11,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     nginx \
     postgresql-client \
-    && docker-php-ext-install pdo pdo_pgsql zip
+    libgd-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip gd \
+    && pecl install grpc \
+    && docker-php-ext-enable grpc
 
 # Configurer Nginx
 COPY nginx/default.conf /etc/nginx/sites-available/default
